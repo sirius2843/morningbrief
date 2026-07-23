@@ -47,9 +47,9 @@ export default function SourcePanel({ modulesBySource, loading, addedIds, onAdd 
       <div className="border-b border-border px-4 pb-3 pt-4">
         <h2 className="mb-3 text-sm font-semibold text-foreground">标准素材库</h2>
         <Tabs value={active} onValueChange={setActive} className="w-full">
-          <TabsList className="w-full flex-wrap">
+          <TabsList className="w-full overflow-x-auto flex-nowrap justify-start">
             {DATA_SOURCES.map((s) => (
-              <TabsTrigger key={s.key} value={s.key} className="flex-1 min-w-fit text-[11px] px-2">
+              <TabsTrigger key={s.key} value={s.key} className="shrink-0 text-[11px] px-2.5 whitespace-nowrap">
                 {s.tabName}
               </TabsTrigger>
             ))}
