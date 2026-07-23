@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { Plus, GripVertical } from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -28,14 +28,28 @@ export default function SourcePanel({ modulesBySource, loading, addedIds, onAdd 
   const modules = modulesBySource[active] ?? []
   const groups = groupModules(modules)
 
+  // ── 左右滑动切换 Tab ──
+  const touchStart = useRef<{ x: number }>({ x: 0 })
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX }
+  }, [])
+  const onTouchEnd = useCallback((e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStart.current.x
+    if (Math.abs(dx) < 50) return // 滑动距离不够
+    const keys = DATA_SOURCES.map((s) => s.key)
+    const idx = keys.indexOf(active)
+    if (dx < 0 && idx < keys.length - 1) setActive(keys[idx + 1])
+    else if (dx > 0 && idx > 0) setActive(keys[idx - 1])
+  }, [active])
+
   return (
     <div className="flex h-full w-[380px] shrink-0 flex-col border-r border-border bg-muted/30">
       <div className="border-b border-border px-4 pb-3 pt-4">
         <h2 className="mb-3 text-sm font-semibold text-foreground">标准素材库</h2>
         <Tabs value={active} onValueChange={setActive} className="w-full">
-          <TabsList className="w-full">
+          <TabsList className="w-full flex-wrap">
             {DATA_SOURCES.map((s) => (
-              <TabsTrigger key={s.key} value={s.key} className="flex-1">
+              <TabsTrigger key={s.key} value={s.key} className="flex-1 min-w-fit text-[11px] px-2">
                 {s.tabName}
               </TabsTrigger>
             ))}
@@ -43,7 +57,7 @@ export default function SourcePanel({ modulesBySource, loading, addedIds, onAdd 
         </Tabs>
       </div>
 
-      <ScrollArea className="min-h-0 flex-1">
+      <ScrollArea className="min-h-0 flex-1" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         <div className="space-y-4 px-3 py-3">
           {loading && (
             <p className="px-1 py-6 text-center text-xs text-muted-foreground">素材加载中…</p>

@@ -17,6 +17,22 @@ export const DATA_SOURCES: DataSource[] = [
     tabName: '事件池解读',
     url: 'data/standard_live_events.md',
   },
+  // ── 收评素材 ──
+  {
+    key: 'close_market',
+    tabName: '收评数据',
+    url: 'data/close_market_data.md',
+  },
+  {
+    key: 'close_commentary',
+    tabName: '收盘点评',
+    url: 'data/close_commentary.md',
+  },
+  {
+    key: 'close_industry',
+    tabName: '行业观点',
+    url: 'data/close_industry_views.md',
+  },
 ]
 
 // 合规敏感词自检词表（命中仅提示，不阻断导出），按需维护
