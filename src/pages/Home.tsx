@@ -245,7 +245,7 @@ export default function Home() {
             )}
             {currentTab.id === 'chain' && (
               <a
-                href="/ai-chain-dashboard.html"
+                href="./ai-chain-dashboard.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-lg bg-[#1F4E79] px-3.5 py-1.5 text-[13px] font-medium text-white transition-colors hover:bg-[#1a3f63]"
@@ -269,7 +269,7 @@ export default function Home() {
             </div>
             <div className="relative w-full" style={{ height: 'calc(100vh - 220px)', minHeight: '600px' }}>
               <iframe
-                src="/ai-chain-dashboard.html"
+                src="./ai-chain-dashboard.html"
                 className="absolute inset-0 h-full w-full border-0"
                 title="AI产业链行情看板"
                 sandbox="allow-scripts allow-same-origin"
