@@ -272,7 +272,7 @@ export default function Home() {
                 src="./ai-chain-dashboard.html"
                 className="absolute inset-0 h-full w-full border-0"
                 title="AI产业链行情看板"
-                sandbox="allow-scripts allow-same-origin"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox"
               />
             </div>
           </div>
