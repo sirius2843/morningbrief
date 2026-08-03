@@ -1,34 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import {
-  Plus,
-  Trash2,
-  Copy,
-  ClipboardList,
-  Heading1,
-  FileText,
-  Eye,
-  PencilLine,
-  Printer,
-  TriangleAlert,
-} from 'lucide-react'
+import { Copy, Printer, RefreshCw, Clock, ExternalLink } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import SourcePanel, { MODULE_MIME } from '@/components/SourcePanel'
-import EditorBlock, { BLOCK_MIME, type Block } from '@/components/EditorBlock'
-import SignatureFooter from '@/components/SignatureFooter'
-import DocPreview from '@/components/DocPreview'
-import { DATA_SOURCES } from '@/config'
-import { parseModules, type Module } from '@/lib/parseModules'
-import {
-  assembleMarkdown,
-  assembleHtml,
-  assembleScanText,
-  copyRichText,
-} from '@/lib/markdown'
-import { loadSignature, saveSignature, type Signature } from '@/lib/signature'
-import { scanCompliance } from '@/lib/compliance'
+import { TABS, type TabConfig } from '@/config'
+import { renderMarkdown, styleTables, copyRichText } from '@/lib/markdown'
 
 function todayKey(): string {
   const d = new Date()
@@ -36,439 +11,317 @@ function todayKey(): string {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
 }
 
-const TODAY = todayKey()
-const BLOCKS_KEY = `advisor-editor-blocks:${TODAY}`
-const TITLE_KEY = `advisor-doc-title:${TODAY}`
-
-type StoredBlock = Omit<Block, 'editing' | 'type'> & { type?: Block['type'] }
-
-function loadBlocks(): Block[] {
-  try {
-    const raw = localStorage.getItem(BLOCKS_KEY)
-    if (!raw) return []
-    const parsed = JSON.parse(raw) as StoredBlock[]
-    // 兼容无 type 字段的旧数据：一律视为内容块
-    return parsed.map((b) => ({ ...b, type: b.type ?? 'content', editing: false }))
-  } catch {
-    return []
-  }
+function weekdayName(dateStr: string): string {
+  const d = new Date(dateStr)
+  const names = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+  return names[d.getDay()]
 }
 
-function loadDocTitle(): string {
-  return localStorage.getItem(TITLE_KEY) ?? `${TODAY} 早盘点评`
+interface TabState {
+  html: string
+  markdown: string
+  loading: boolean
+  error: string | null
+  updatedAt: Date | null
 }
 
-let uidCounter = 0
-function newUid(): string {
-  uidCounter += 1
-  return `b${Date.now().toString(36)}-${uidCounter}-${Math.random().toString(36).slice(2, 7)}`
-}
+const EMPTY_TAB: TabState = { html: '', markdown: '', loading: true, error: null, updatedAt: null }
 
 export default function Home() {
-  const [mode, setMode] = useState<'edit' | 'preview'>('edit')
-  const [modulesBySource, setModulesBySource] = useState<Record<string, Module[]>>({})
-  const [loading, setLoading] = useState(true)
-  const [blocks, setBlocks] = useState<Block[]>(loadBlocks)
-  const [docTitle, setDocTitle] = useState<string>(loadDocTitle)
-  const [signature, setSignature] = useState<Signature>(loadSignature)
-  const [insertIndex, setInsertIndex] = useState<number | null>(null)
+  const today = todayKey()
+  const [activeTab, setActiveTab] = useState(TABS[0].id)
+  const [states, setStates] = useState<Record<string, TabState>>({})
 
-  // 加载标准素材（带时间戳防缓存，文件每天更新）
-  useEffect(() => {
-    let cancelled = false
-    ;(async () => {
-      setLoading(true)
-      const result: Record<string, Module[]> = {}
-      await Promise.all(
-        DATA_SOURCES.map(async (s) => {
-          try {
-            const res = await fetch(`${s.url}?t=${Date.now()}`)
-            const text = await res.text()
-            result[s.key] = parseModules(text, s.key)
-          } catch {
-            result[s.key] = []
-          }
-        }),
-      )
-      if (!cancelled) {
-        setModulesBySource(result)
-        setLoading(false)
-      }
-    })()
-    return () => {
-      cancelled = true
-    }
-  }, [])
+  const currentTab = TABS.find((t) => t.id === activeTab) ?? TABS[0]
+  const currentState = states[activeTab] ?? EMPTY_TAB
 
-  // 编辑区持久化（key 带当天日期，新的一天自动重置）
-  useEffect(() => {
-    const stored: StoredBlock[] = blocks.map(({ uid, type, title, markdown, sourceId }) => ({
-      uid,
-      type,
-      title,
-      markdown,
-      sourceId,
+  // 加载单个 Tab 内容
+  const loadTab = useCallback(async (tab: TabConfig) => {
+    setStates((prev) => ({
+      ...prev,
+      [tab.id]: { ...(prev[tab.id] ?? EMPTY_TAB), loading: true, error: null },
     }))
-    localStorage.setItem(BLOCKS_KEY, JSON.stringify(stored))
-  }, [blocks])
 
-  // 文档标题按天持久化
-  useEffect(() => {
-    localStorage.setItem(TITLE_KEY, docTitle)
-  }, [docTitle])
-
-  // 署名全局持久化（不随日期清空）
-  useEffect(() => {
-    saveSignature(signature)
-  }, [signature])
-
-  const addedIds = useMemo(
-    () => new Set(blocks.map((b) => b.sourceId).filter((x): x is string => !!x)),
-    [blocks],
-  )
-
-  const assembleBlocks = useMemo(
-    () => blocks.map(({ type, title, markdown }) => ({ type, title, markdown })),
-    [blocks],
-  )
-
-  const complianceHits = useMemo(
-    () => scanCompliance(assembleScanText(docTitle, assembleBlocks, signature)),
-    [docTitle, assembleBlocks, signature],
-  )
-
-  const addModule = useCallback((m: Module, at?: number) => {
-    setBlocks((prev) => {
-      const block: Block = {
-        uid: newUid(),
-        type: 'content',
-        sourceId: m.id,
-        title: m.title,
-        markdown: m.markdown,
-        editing: false,
-      }
-      const next = [...prev]
-      next.splice(at === undefined ? next.length : at, 0, block)
-      return next
-    })
-  }, [])
-
-  const addCustomParagraph = useCallback(() => {
-    setBlocks((prev) => [
-      ...prev,
-      {
-        uid: newUid(),
-        type: 'content',
-        sourceId: null,
-        title: '自定义标题',
-        markdown: '',
-        editing: true,
-      },
-    ])
-  }, [])
-
-  const addSection = useCallback(() => {
-    setBlocks((prev) => [
-      ...prev,
-      { uid: newUid(), type: 'section', sourceId: null, title: '一、章节标题', markdown: '', editing: false },
-    ])
-  }, [])
-
-  const updateBlock = useCallback((uid: string, patch: Partial<Block>) => {
-    setBlocks((prev) => prev.map((b) => (b.uid === uid ? { ...b, ...patch } : b)))
-  }, [])
-
-  const deleteBlock = useCallback((uid: string) => {
-    setBlocks((prev) => prev.filter((b) => b.uid !== uid))
-  }, [])
-
-  const moveBlock = useCallback((index: number, dir: -1 | 1) => {
-    setBlocks((prev) => {
-      const next = [...prev]
-      const j = index + dir
-      if (j < 0 || j >= next.length) return prev
-      ;[next[index], next[j]] = [next[j], next[index]]
-      return next
-    })
-  }, [])
-
-  const clearAll = useCallback(() => {
-    if (blocks.length === 0) return
-    if (window.confirm('确定清空编辑区的全部模块吗？（署名不受影响）')) setBlocks([])
-  }, [blocks.length])
-
-  const updateSignature = useCallback((patch: Partial<Signature>) => {
-    setSignature((prev) => ({ ...prev, ...patch }))
-  }, [])
-
-  // 计算在某个块上 dragover 时的插入位置（上半 = 前，下半 = 后）
-  const handleDragOverBlock = useCallback((e: React.DragEvent, index: number) => {
-    if (![MODULE_MIME, BLOCK_MIME].some((t) => e.dataTransfer.types.includes(t))) return
-    e.preventDefault()
-    e.stopPropagation()
-    e.dataTransfer.dropEffect = e.dataTransfer.types.includes(BLOCK_MIME) ? 'move' : 'copy'
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
-    const before = e.clientY < rect.top + rect.height / 2
-    setInsertIndex(before ? index : index + 1)
-  }, [])
-
-  const handleContainerDragOver = useCallback((e: React.DragEvent) => {
-    if (![MODULE_MIME, BLOCK_MIME].some((t) => e.dataTransfer.types.includes(t))) return
-    e.preventDefault()
-    e.dataTransfer.dropEffect = e.dataTransfer.types.includes(BLOCK_MIME) ? 'move' : 'copy'
-  }, [])
-
-  const insertAt = useCallback(
-    (dataTransfer: DataTransfer, at: number) => {
-      const moduleJson = dataTransfer.getData(MODULE_MIME)
-      if (moduleJson) {
-        try {
-          addModule(JSON.parse(moduleJson) as Module, at)
-        } catch {
-          /* ignore bad payload */
-        }
-        return
-      }
-      const blockUid = dataTransfer.getData(BLOCK_MIME)
-      if (blockUid) {
-        setBlocks((prev) => {
-          const from = prev.findIndex((b) => b.uid === blockUid)
-          if (from === -1) return prev
-          const next = [...prev]
-          const [moved] = next.splice(from, 1)
-          const to = from < at ? at - 1 : at
-          next.splice(Math.max(0, Math.min(to, next.length)), 0, moved)
-          return next
-        })
-      }
-    },
-    [addModule],
-  )
-
-  const handleDropOnBlock = useCallback(
-    (e: React.DragEvent, index: number) => {
-      e.preventDefault()
-      e.stopPropagation()
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
-      const before = e.clientY < rect.top + rect.height / 2
-      insertAt(e.dataTransfer, before ? index : index + 1)
-      setInsertIndex(null)
-    },
-    [insertAt],
-  )
-
-  const handleContainerDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setBlocks((prev) => {
-      const moduleJson = e.dataTransfer.getData(MODULE_MIME)
-      const blockUid = e.dataTransfer.getData(BLOCK_MIME)
-      if (moduleJson) {
-        try {
-          const m = JSON.parse(moduleJson) as Module
-          return [
-            ...prev,
-            {
-              uid: newUid(),
-              type: 'content',
-              sourceId: m.id,
-              title: m.title,
-              markdown: m.markdown,
-              editing: false,
-            },
-          ]
-        } catch {
-          return prev
-        }
-      }
-      if (blockUid) {
-        const from = prev.findIndex((b) => b.uid === blockUid)
-        if (from === -1 || from === prev.length - 1) return prev
-        const next = [...prev]
-        const [moved] = next.splice(from, 1)
-        next.push(moved)
-        return next
-      }
-      return prev
-    })
-    setInsertIndex(null)
-  }, [])
-
-  const copyAll = useCallback(async () => {
-    if (blocks.length === 0) {
-      toast.info('编辑区还是空的，先添加一些模块吧')
+    // 产业链跟踪 Tab 特殊处理
+    if (tab.id === 'chain') {
+      setStates((prev) => ({
+        ...prev,
+        [tab.id]: {
+          html: '',
+          markdown: '',
+          loading: false,
+          error: null,
+          updatedAt: null,
+        },
+      }))
       return
     }
-    const md = assembleMarkdown(docTitle, assembleBlocks, signature)
-    const html = assembleHtml(docTitle, assembleBlocks, signature)
-    const mode_ = await copyRichText(md, html)
-    if (mode_ === 'rich') {
-      toast.success('已复制，可直接粘贴', { description: '已同时写入 Markdown 与富文本格式，含署名' })
-    } else {
-      toast.success('已复制，可直接粘贴', { description: '当前浏览器仅支持复制纯文本 Markdown' })
-    }
-  }, [blocks.length, docTitle, assembleBlocks, signature])
 
+    try {
+      const results = await Promise.all(
+        tab.sources.map(async (src) => {
+          const res = await fetch(`${src}?t=${Date.now()}`)
+          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+          const text = await res.text()
+          return { text, updatedAt: res.headers.get('Last-Modified') }
+        }),
+      )
+
+      // 合并多个源文件
+      const markdown = results.map((r) => r.text).join('\n\n---\n\n')
+      const html = styleTables(renderMarkdown(markdown))
+
+      // 取最新的更新时间
+      let updatedAt: Date | null = null
+      for (const r of results) {
+        if (r.updatedAt) {
+          const d = new Date(r.updatedAt)
+          if (!updatedAt || d > updatedAt) updatedAt = d
+        }
+      }
+
+      setStates((prev) => ({
+        ...prev,
+        [tab.id]: { html, markdown, loading: false, error: null, updatedAt },
+      }))
+    } catch (err: any) {
+      setStates((prev) => ({
+        ...prev,
+        [tab.id]: {
+          ...EMPTY_TAB,
+          loading: false,
+          error: err.message ?? '加载失败',
+        },
+      }))
+    }
+  }, [])
+
+  // 初始加载 + Tab 切换时加载
+  useEffect(() => {
+    if (!states[activeTab]) {
+      loadTab(currentTab)
+    }
+  }, [activeTab, currentTab, states, loadTab])
+
+  // 刷新当前 Tab
+  const refreshTab = useCallback(() => {
+    loadTab(currentTab)
+  }, [currentTab, loadTab])
+
+  // 复制当前 Tab 内容
+  const copyTab = useCallback(async () => {
+    if (!currentState.markdown) {
+      toast.info('当前 Tab 暂无内容')
+      return
+    }
+    const html = styleTables(renderMarkdown(currentState.markdown))
+    const mode = await copyRichText(currentState.markdown, html)
+    if (mode === 'rich') {
+      toast.success('已复制，可直接粘贴到公众号/飞书/Word')
+    } else {
+      toast.success('已复制纯文本')
+    }
+  }, [currentState.markdown])
+
+  // 导出 PDF
   const exportPdf = useCallback(() => {
     window.print()
   }, [])
 
+  // 新鲜度标签
+  const freshnessBadge = useMemo(() => {
+    if (!currentState.updatedAt) return null
+    const now = new Date()
+    const diff = now.getTime() - currentState.updatedAt.getTime()
+    const hours = Math.floor(diff / 3600000)
+
+    let label: string
+    let color: string
+    if (hours < 1) {
+      const mins = Math.floor(diff / 60000)
+      label = `${mins} 分钟前更新`
+      color = 'text-emerald-600 bg-emerald-50'
+    } else if (hours < 6) {
+      label = `${hours} 小时前更新`
+      color = 'text-blue-600 bg-blue-50'
+    } else if (hours < 24) {
+      label = `${hours} 小时前更新`
+      color = 'text-amber-600 bg-amber-50'
+    } else {
+      const days = Math.floor(hours / 24)
+      label = `${days} 天前更新`
+      color = 'text-slate-500 bg-slate-100'
+    }
+
+    return { label, color }
+  }, [currentState.updatedAt])
+
   return (
-    <div className="flex h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-[#F8F9FB]">
       <Toaster position="top-center" richColors />
-      {/* 顶部标题栏 */}
-      <header className="no-print flex h-14 shrink-0 items-center justify-between border-b border-border px-5">
-        <div className="flex items-baseline gap-3">
-          <h1 className="text-base font-semibold tracking-tight text-foreground">投顾素材编辑台</h1>
-          <p className="hidden text-xs text-muted-foreground sm:block">
-            拖拽左侧标准素材，自由组装你的今日点评
-          </p>
+
+      {/* 顶部导航栏 */}
+      <header className="no-print sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+          {/* 品牌 */}
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="rounded-lg bg-[#1F4E79] px-3 py-1.5 text-[13px] font-semibold text-white tracking-wide">
+              毛驴有话说
+            </span>
+            <span className="hidden text-xs text-slate-400 sm:inline">· 投顾素材</span>
+          </div>
+
+          {/* Tab 导航 */}
+          <nav className="flex items-center gap-1 rounded-lg bg-slate-100 p-1">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`rounded-md px-4 py-1.5 text-[13px] font-medium transition-all ${
+                  activeTab === tab.id
+                    ? 'bg-white text-[#1F4E79] shadow-sm'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* 日期 + 操作 */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs tabular-nums text-slate-400">
+              {today} {weekdayName(today)}
+            </span>
+            <button
+              onClick={refreshTab}
+              className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+              title="刷新"
+            >
+              <RefreshCw className={`h-3.5 w-3.5 ${currentState.loading ? 'animate-spin' : ''}`} />
+            </button>
+          </div>
         </div>
-        <span className="text-xs tabular-nums text-muted-foreground">{TODAY}</span>
       </header>
 
-      {mode === 'edit' ? (
-        <div className="flex min-h-0 flex-1">
-          {/* 左侧：素材库 */}
-          <SourcePanel
-            modulesBySource={modulesBySource}
-            loading={loading}
-            addedIds={addedIds}
-            onAdd={(m) => addModule(m)}
-          />
-
-          {/* 右侧：编辑区（纸面风格） */}
-          <div className="flex min-w-0 flex-1 flex-col bg-muted/40">
-            {/* 工具条 */}
-            <div className="no-print flex h-12 shrink-0 items-center gap-2 border-b border-border bg-background px-4">
-              <ClipboardList className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-semibold text-foreground">我的编辑区</span>
-              <span className="text-xs text-muted-foreground">
-                {blocks.length > 0 ? `${blocks.length} 个模块` : ''}
+      {/* 主体内容 */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 sm:px-6">
+        {/* Tab 标题栏：标题 + 新鲜度 + 操作按钮 */}
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <h1 className="text-lg font-bold tracking-tight text-slate-800">
+              {currentTab.label}
+            </h1>
+            {freshnessBadge && (
+              <span
+                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-medium ${freshnessBadge.color}`}
+              >
+                <Clock className="h-3 w-3" />
+                {freshnessBadge.label}
               </span>
-              <div className="ml-auto flex items-center gap-2">
-                <Button variant="outline" size="sm" className="h-8" onClick={addSection}>
-                  <Heading1 className="mr-1 h-3.5 w-3.5" />
-                  章节标题
-                </Button>
-                <Button variant="outline" size="sm" className="h-8" onClick={addCustomParagraph}>
-                  <Plus className="mr-1 h-3.5 w-3.5" />
-                  自定义段落
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 text-muted-foreground hover:text-destructive"
-                  onClick={clearAll}
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {currentTab.id !== 'chain' && (
+              <>
+                <button
+                  onClick={copyTab}
+                  disabled={!currentState.markdown}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-[13px] font-medium text-slate-600 transition-colors hover:border-[#1F4E79] hover:text-[#1F4E79] disabled:opacity-40"
                 >
-                  <Trash2 className="mr-1 h-3.5 w-3.5" />
-                  清空
-                </Button>
-                <Separator orientation="vertical" className="h-5" />
-                <Button variant="outline" size="sm" className="h-8" onClick={() => setMode('preview')}>
-                  <Eye className="mr-1 h-3.5 w-3.5" />
-                  预览
-                </Button>
-                <Button size="sm" className="h-8" onClick={copyAll}>
-                  <Copy className="mr-1 h-3.5 w-3.5" />
-                  一键复制
-                </Button>
-              </div>
-            </div>
-
-            {/* 块列表（纸面文档风格） */}
-            <div className="min-h-0 flex-1" onDragOver={handleContainerDragOver} onDrop={handleContainerDrop}>
-              <ScrollArea className="h-full">
-                <div className="mx-auto max-w-[860px] px-4 py-5 pb-16">
-                  {/* 文档标题（按天保存） */}
-                  <div className="mb-4 flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 shadow-xs">
-                    <FileText className="h-4 w-4 shrink-0 text-primary" />
-                    <input
-                      value={docTitle}
-                      onChange={(e) => setDocTitle(e.target.value)}
-                      className="min-w-0 flex-1 bg-transparent text-[17px] font-bold tracking-tight text-foreground outline-none"
-                      placeholder="文档标题，如：2026-07-20 早盘点评"
-                    />
-                  </div>
-
-                  <div className="space-y-3">
-                    {blocks.length === 0 ? (
-                      <div className="flex h-[40vh] items-center justify-center rounded-lg border-2 border-dashed border-border bg-card/60">
-                        <p className="text-sm text-muted-foreground">
-                          从左侧拖入模块，或点击 + 章节标题 / + 自定义段落
-                        </p>
-                      </div>
-                    ) : (
-                      blocks.map((b, i) => (
-                        <div key={b.uid}>
-                          {insertIndex === i && (
-                            <div className="mb-3 h-0.5 rounded bg-primary shadow-[0_0_0_1px_hsl(var(--primary))]" />
-                          )}
-                          <EditorBlock
-                            block={b}
-                            index={i}
-                            total={blocks.length}
-                            onChange={updateBlock}
-                            onMove={moveBlock}
-                            onDelete={deleteBlock}
-                            onDragOverBlock={handleDragOverBlock}
-                            onDropOnBlock={handleDropOnBlock}
-                          />
-                        </div>
-                      ))
-                    )}
-                    {blocks.length > 0 && insertIndex === blocks.length && (
-                      <div className="h-0.5 rounded bg-primary shadow-[0_0_0_1px_hsl(var(--primary))]" />
-                    )}
-
-                    {/* 署名（固定文末，不可删除/拖动，全局保存） */}
-                    <SignatureFooter signature={signature} onChange={updateSignature} />
-                  </div>
-                </div>
-              </ScrollArea>
-            </div>
+                  <Copy className="h-3.5 w-3.5" />
+                  复制全文
+                </button>
+                <button
+                  onClick={exportPdf}
+                  disabled={!currentState.markdown}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#1F4E79] px-3.5 py-1.5 text-[13px] font-medium text-white transition-colors hover:bg-[#1a3f63] disabled:opacity-40"
+                >
+                  <Printer className="h-3.5 w-3.5" />
+                  下载 PDF
+                </button>
+              </>
+            )}
+            {currentTab.id === 'chain' && (
+              <a
+                href="/ai-chain-dashboard.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1F4E79] px-3.5 py-1.5 text-[13px] font-medium text-white transition-colors hover:bg-[#1a3f63]"
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+                打开完整看板
+              </a>
+            )}
           </div>
         </div>
-      ) : (
-        /* 预览模式：隐藏左侧素材库，只留纸面 */
-        <div className="flex min-h-0 flex-1 flex-col bg-muted/40">
-          <div className="no-print flex h-12 shrink-0 items-center gap-2 border-b border-border bg-background px-4">
-            <Eye className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-semibold text-foreground">文档预览</span>
-            <div className="ml-auto flex items-center gap-2">
-              <Button variant="outline" size="sm" className="h-8" onClick={() => setMode('edit')}>
-                <PencilLine className="mr-1 h-3.5 w-3.5" />
-                返回编辑
-              </Button>
-              <Button variant="outline" size="sm" className="h-8" onClick={copyAll}>
-                <Copy className="mr-1 h-3.5 w-3.5" />
-                一键复制
-              </Button>
-              <Button size="sm" className="h-8" onClick={exportPdf}>
-                <Printer className="mr-1 h-3.5 w-3.5" />
-                导出 PDF
-              </Button>
-            </div>
-          </div>
 
-          {/* 合规敏感词警示条 */}
-          {complianceHits.length > 0 && (
-            <div className="no-print flex shrink-0 items-start gap-2 border-b border-amber-300 bg-amber-50 px-4 py-2.5 text-[13px] text-amber-900">
-              <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
-              <p>
-                <span className="font-semibold">合规提示：</span>
-                检测到敏感词（不阻断导出，请人工复核）——
-                {complianceHits.map((h) => `「${h.word}」×${h.count}`).join('、')}
+        {/* 内容区域 */}
+        {currentTab.id === 'chain' ? (
+          /* 产业链跟踪 Tab */
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+            <div className="border-b border-slate-100 bg-[#F8F9FB] px-6 py-4">
+              <h2 className="text-[15px] font-semibold text-slate-700">AI 产业链行情看板</h2>
+              <p className="mt-1 text-[13px] text-slate-400">
+                覆盖 AI 产业链核心标的的实时行情、产业链增量与关键日历
               </p>
             </div>
-          )}
-
-          <ScrollArea className="min-h-0 flex-1">
-            <div className="px-4 py-8">
-              <DocPreview docTitle={docTitle} blocks={assembleBlocks} signature={signature} />
+            <div className="relative w-full" style={{ height: 'calc(100vh - 220px)', minHeight: '600px' }}>
+              <iframe
+                src="/ai-chain-dashboard.html"
+                className="absolute inset-0 h-full w-full border-0"
+                title="AI产业链行情看板"
+                sandbox="allow-scripts allow-same-origin"
+              />
             </div>
-          </ScrollArea>
-        </div>
-      )}
+          </div>
+        ) : (
+          /* 早盘 / 收盘内容区 */
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            {currentState.loading ? (
+              <div className="flex items-center justify-center py-20">
+                <div className="flex flex-col items-center gap-3">
+                  <RefreshCw className="h-6 w-6 animate-spin text-slate-300" />
+                  <p className="text-sm text-slate-400">加载中...</p>
+                </div>
+              </div>
+            ) : currentState.error ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <div className="rounded-full bg-red-50 p-3">
+                  <Clock className="h-5 w-5 text-red-400" />
+                </div>
+                <p className="mt-3 text-sm text-slate-500">加载失败</p>
+                <p className="mt-1 text-xs text-slate-400">{currentState.error}</p>
+                <button
+                  onClick={refreshTab}
+                  className="mt-4 rounded-lg border border-slate-200 bg-white px-4 py-1.5 text-[13px] text-slate-600 transition-colors hover:bg-slate-50"
+                >
+                  重新加载
+                </button>
+              </div>
+            ) : !currentState.markdown ? (
+              <div className="flex items-center justify-center py-20">
+                <p className="text-sm text-slate-400">暂无内容</p>
+              </div>
+            ) : (
+              <ScrollArea className="h-[calc(100vh-220px)]">
+                <article
+                  className="md-preview doc-body mx-auto max-w-[780px] px-6 py-8 sm:px-10"
+                  dangerouslySetInnerHTML={{ __html: currentState.html }}
+                />
+              </ScrollArea>
+            )}
+          </div>
+        )}
+      </main>
+
+      {/* 底部免责 */}
+      <footer className="no-print border-t border-slate-200 bg-white py-4 text-center">
+        <p className="text-[11px] text-slate-400">
+          以上内容仅供参考，不构成投资建议。市场有风险，投资需谨慎。数据来源：通联数据、东方财富研报中心。
+        </p>
+      </footer>
     </div>
   )
 }

@@ -73,11 +73,11 @@
     @apply bg-background text-foreground;
   }
 }
-/* Markdown 预览排版 */
+/* Markdown 阅读排版（正文 16px，适合投顾直接使用） */
 .md-preview {
-  font-size: 13.5px;
-  line-height: 1.75;
-  color: hsl(var(--foreground));
+  font-size: 16px;
+  line-height: 1.9;
+  color: #1f2937;
   word-break: break-word;
 }
 .md-preview h1,
@@ -88,11 +88,15 @@
   margin: 0.9em 0 0.45em;
   line-height: 1.4;
 }
-.md-preview h1 { font-size: 1.25em; }
-.md-preview h2 { font-size: 1.15em; }
-.md-preview h3 { font-size: 1.05em; }
+.md-preview h1 { font-size: 1.4em; color: #1e3a8a; margin-top: 0; }
+.md-preview h2 { font-size: 1.2em; color: #1e3a8a; margin-top: 1.4em; }
+.md-preview h3 { font-size: 1.08em; }
 .md-preview h4 { font-size: 1em; }
-.md-preview p { margin: 0.5em 0; }
+/* 段落间距加大，提升自然语言阅读体验 */
+.md-preview p { margin: 0.8em 0; }
+/* 正文内表格（涨跌幅等）保持节制 */
+.md-preview table + p,
+.md-preview p + table { margin-top: 1em; }
 .md-preview ul,
 .md-preview ol {
   margin: 0.5em 0;
@@ -190,10 +194,20 @@
   }
 }
 
-/* 纸面文档中文字体栈 */
-.print-paper,
-.print-paper .md-preview {
-  font-family:
-    -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    "Source Han Sans SC", "Noto Sans CJK SC", sans-serif;
+/* 移动端适配 */
+@media (max-width: 640px) {
+  .md-preview {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .md-preview h1 { font-size: 1.25em; }
+  .md-preview h2 { font-size: 1.12em; }
+  .md-preview table {
+    font-size: 12px;
+  }
+  .md-preview th,
+  .md-preview td {
+    padding: 4px 6px;
+  }
 }
+
