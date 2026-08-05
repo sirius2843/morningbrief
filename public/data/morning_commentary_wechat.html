@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>早盘必读 2026-08-04</title>
+<title>早盘必读 2026-08-05</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -13,274 +13,135 @@
     line-height: 1.8;
     font-size: 15px;
   }
-  .container {
-    max-width: 680px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 0 16px 20px;
-  }
-
-  /* 栏目头 badge */
-  .column-badge {
-    display: inline-block;
-    background: #1F4E79;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 4px 14px;
-    border-radius: 3px;
-    margin: 16px 0 10px;
-    letter-spacing: 1px;
-  }
-
-  /* 主标题 */
-  .main-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: #1a3a5c;
-    line-height: 1.4;
-    margin-bottom: 4px;
-  }
-
-  /* 日期副标题 */
-  .date-subtitle {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eee;
-  }
-
-  /* 导语块 */
-  .lede-block {
-    background: #f0f6fc;
-    border-left: 4px solid #1F4E79;
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    border-radius: 0 4px 4px 0;
-    font-size: 15px;
-    color: #333;
-    line-height: 1.9;
-  }
-
-  /* 段落标题 */
-  .section-title {
-    background: #1F4E79;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 6px 0 6px 12px;
-    margin: 24px 0 12px;
-    border-left: 5px solid #0d3b5e;
-    letter-spacing: 0.5px;
-  }
-
-  /* 正文段落 */
-  .content p {
-    margin-bottom: 14px;
-    text-indent: 2em;
-    line-height: 1.9;
-    color: #333;
-  }
-
-  /* 涨跌颜色 */
+  .container { max-width: 680px; margin: 0 auto; background: #fff; padding: 0 16px 20px; }
+  .column-badge { display: inline-block; background: #1F4E79; color: #fff; font-size: 13px; font-weight: 600; padding: 4px 14px; border-radius: 3px; margin: 16px 0 10px; letter-spacing: 1px; }
+  .main-title { font-size: 22px; font-weight: 800; color: #1a3a5c; line-height: 1.4; margin-bottom: 4px; }
+  .date-subtitle { font-size: 14px; color: #999; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #eee; }
+  .lede-block { background: #f0f6fc; border-left: 4px solid #1F4E79; padding: 12px 16px; margin-bottom: 20px; border-radius: 0 4px 4px 0; font-size: 15px; color: #333; line-height: 1.9; }
+  .section-title { background: #1F4E79; color: #fff; font-size: 16px; font-weight: 700; padding: 6px 0 6px 12px; margin: 24px 0 12px; border-left: 5px solid #0d3b5e; letter-spacing: 0.5px; }
+  .content p { margin-bottom: 14px; text-indent: 2em; line-height: 1.9; color: #333; }
   .up { color: #D33A2F; font-weight: 600; }
   .down { color: #1E9E5A; font-weight: 600; }
-
-  /* 表格 */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0 16px;
-    font-size: 14px;
-  }
-  .data-table th {
-    background: #1F4E79;
-    color: #fff;
-    padding: 8px 12px;
-    text-align: left;
-    font-weight: 600;
-  }
-  .data-table td {
-    padding: 7px 12px;
-    border-bottom: 1px solid #eee;
-  }
-  .data-table tr:nth-child(even) td {
-    background: #fafbfc;
-  }
+  .data-table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  .data-table th { background: #1F4E79; color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
+  .data-table td { padding: 7px 12px; border-bottom: 1px solid #eee; }
+  .data-table tr:nth-child(even) td { background: #fafbfc; }
   .data-table .col-pct { text-align: right; }
-
-  /* 资金流向表格 */
   .flow-table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
   .flow-table th { background: #1F4E79; color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
   .flow-table td { padding: 7px 12px; border-bottom: 1px solid #eee; }
   .flow-table tr:nth-child(even) td { background: #fafbfc; }
-
   .flow-inflow .flow-amt { color: #D33A2F; font-weight: 600; }
   .flow-outflow .flow-amt { color: #1E9E5A; font-weight: 600; }
-
-  /* 底部互动 */
-  .footer-interact {
-    margin-top: 30px;
-    padding: 16px;
-    background: #f8f8f8;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-    line-height: 1.8;
-  }
+  .footer-interact { margin-top: 30px; padding: 16px; background: #f8f8f8; border-radius: 6px; text-align: center; font-size: 14px; color: #666; line-height: 1.8; }
   .footer-interact .emphasis { color: #1F4E79; font-weight: 600; }
-
-  /* 免责声明 */
-  .disclaimer {
-    margin-top: 16px;
-    padding: 12px 14px;
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 4px;
-    font-size: 12px;
-    color: #aaa;
-    line-height: 1.7;
-  }
+  .disclaimer { margin-top: 16px; padding: 12px 14px; background: #fff; border: 1px solid #e8e8e8; border-radius: 4px; font-size: 12px; color: #aaa; line-height: 1.7; }
   .disclaimer strong { color: #999; }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- 栏目头 -->
   <div class="column-badge">毛驴有话说 · 每日早盘</div>
-
-  <!-- 主标题 -->
   <div class="main-title">早盘必读</div>
+  <div class="date-subtitle">2026年8月5日 星期三</div>
 
-  <!-- 日期 -->
-  <div class="date-subtitle">2026年8月4日 星期二</div>
-
-  <!-- 导语 -->
   <div class="lede-block">
-隔夜美股科技线暴力反攻，纳指涨超2%创近月最佳单日表现，叠加美伊谈判压制油价大跌5%，全球risk-off情绪显著退潮。A股昨日缩量调整但赚钱效应不差——4000+个股飘红，问题是科创50独自暴跌5%，科技线内部分化到了极致。今天的关键问题是：隔夜外盘科技大反弹能不能把科创50从坑里拉出来？
+外围暖风劲吹——美股道指和标普双双刷新历史新高，费城半导体指数单日暴涨<span class="up">+6.55%</span>，日韩早盘跟涨气势如虹。昨日A股已先行启动修复，创业板飙涨<span class="up">+5.64%</span>、科创50涨<span class="up">+4.09%</span>，科技线从7月暴跌中猛烈回弹。今日的问题是：连续修复之后，承接力度还能撑住吗？
   </div>
 
-  <!-- 正文内容 -->
   <div class="content">
 
-    <!-- 隔夜外盘 -->
     <div class="section-title">隔夜外盘</div>
 
     <p>
-隔夜美股三大指数集体大涨，道指收涨<span class="up">+1.32%</span>报53178点再创收盘新高，标普500涨<span class="up">+1.48%</span>报7600点，纳指涨<span class="up">+2.13%</span>报25914点。科技七巨头指数飙升3.6%创3月底以来最佳单日表现——Meta涨超6%、微软涨近5%、亚马逊和谷歌涨超4%、英伟达涨近3%，仅苹果逆势跌<span class="down">-1.78%</span>。费城半导体指数开盘一度暴跌，随后低开高走收涨<span class="up">+1.05%</span>，闪迪涨超6%、高通涨超2%，存储板块上演深V。中概股涨跌互现，金龙指数涨<span class="up">+0.75%</span>，阿里巴巴涨超4%领跑。
+隔夜美股气势如虹。道指涨<span class="up">+1.71%</span>收于54085.88点，标普500涨<span class="up">+1.79%</span>收于7736.52点，两大指数均创收盘历史新高；纳斯达克综合指数涨<span class="up">+2.59%</span>收于26584.99点。科技股全线爆发，费城半导体指数暴涨<span class="up">+6.55%</span>，连续第四个交易日反弹——7月该指数累计暴跌超20%，如今报复性修复力度惊人。个股层面，ARM飙涨<span class="up">+17%</span>，英特尔涨<span class="up">+10.84%</span>，闪迪涨超<span class="up">+10%</span>，美光科技涨<span class="up">+7.62%</span>，AMD涨<span class="up">+7%</span>，高通涨<span class="up">+7.32%</span>，博通涨超<span class="up">+6%</span>。中概股小幅分化，纳斯达克中国金龙指数微跌<span class="down">-0.35%</span>，阿里巴巴逆势涨<span class="up">+1.3%</span>。
     </p>
 
     <p>
-欧洲同步走强，德国DAX涨<span class="up">+1.59%</span>，法国CAC涨<span class="up">+1.22%</span>。大宗方面，美伊对话消息重挫油价——WTI跌<span class="down">-5.11%</span>报80.34美元，盘中一度跌超7%；布伦特跌<span class="down">-4.73%</span>报83.77美元。黄金报4052美元基本持平，伦铜微涨<span class="up">+0.33%</span>。汇率端美元指数报99.96微涨0.18%，离岸人民币6.7583小幅走贬54bp。
+亚太早盘承接强势。日经225高开高走涨<span class="up">+1.77%</span>报65089点，韩国KOSPI涨<span class="up">+4.44%</span>报6641点，SK海力士涨超6%、三星电子涨超5%。A50期货隔夜夜盘微涨<span class="up">+0.02%</span>报14755点，但盘前转跌约<span class="down">-0.12%</span>，内外资对权重蓝筹仍有分歧。
     </p>
 
     <p>
-亚太早盘跟涨积极。日经225高开<span class="up">+0.38%</span>报63995点，韩国KOSPI高开<span class="up">+1.5%</span>报6351点，SK海力士涨超2%、三星电子涨超1%。A50期货和恒生期货盘前均小幅走高，整体外围环境对A股偏友好。
+汇率端美元指数跌<span class="down">-0.11%</span>报99.86，离岸人民币涨103基点报6.7480，人民币偏强运行对资产价格形成支撑。商品方面，受美伊霍尔木兹海峡谈判取得积极进展的消息刺激，地缘风险溢价大幅消退，WTI原油暴跌<span class="down">-6.47%</span>至75.14美元，布伦特跌<span class="down">-6.08%</span>至78.68美元，双双创三周新低。黄金受通胀预期下行和美元走弱双重支撑，COMEX黄金涨<span class="up">+1.07%</span>报4134美元，白银大涨<span class="up">+3.27%</span>报59.75美元。
     </p>
 
-    <!-- 事件扫描 -->
     <div class="section-title">事件扫描</div>
 
     <p>
-隔夜最大的变量是美伊局势出现缓和信号。特朗普称美伊谈判已启动，第一阶段开放霍尔木兹海峡"最快明天完成"，第二阶段讨论无核化。尽管伊朗官方否认与美国直接谈判、仅承认与阿曼就海峡问题对话，但市场用脚投票——WTI盘中暴跌7%以上，全球风险偏好明显回升。这对A股有两层影响：一是能源和航运板块的避险溢价会快速消退，煤炭、石油石化短线承压；二是整体风险偏好修复利好科技成长估值，尤其此前受油价和地缘压制的方向。
+隔夜最核心的变量是中东局势的大幅缓和。美国财长贝森特称最快48小时内与伊朗达成霍尔木兹海峡开放协议，卡塔尔外交部证实斡旋取得进展，伊朗与阿曼的技术和政治层面谈判也在推进。一旦海峡航运恢复正常，持续数月的地缘溢价将系统性消退——这对全球通胀预期、美联储加息节奏、以及A股能源和航运板块的定价逻辑都是直接冲击。
     </p>
 
     <p>
-国内政策面继续加码。国务院公布修订后的《集成电路布图设计保护条例》，10月15日起施行，增加独创性声明要求，对半导体知识产权保护形成制度升级。发改委和能源局印发新型电力系统"十五五"规划，2030年新型储能3亿千瓦、非化石能源发电占比50%，特高压十四五在建规模两倍——电力设备和电网方向获顶层文件加持。证监会对港合作10条落地，涵盖港股回A上市、ETF快速注册等，对券商和港股相关品种形成情绪提振。
+国内方面，央行今日开展5000亿元3个月期买断式逆回购操作，8月到期3000亿，净投放2000亿，连续第二个月加量续作。8月MLF到期6000亿叠加政府债净融资约2.77万亿，资金面压力不小，央行提前对冲释放呵护信号。产业端重磅连连——《智能网联汽车自动驾驶系统安全要求》强制性国标正式发布，2027年7月实施，这是我国首部L3/L4自动驾驶强制标准，利好头部车企和智驾产业链。大基金三期通过国投集新基金入股沈阳正芯半导体，半导体国产替代方向持续获政策资金加持。
     </p>
 
     <p>
-产业层面，储能产业链18天内7家企业集体涨价，涨幅2%-30%，行业从"以价换量"转向"以质定价"，亿纬锂能、盛弘股份等核心标的定价权改善。宁德时代中期分红61.8亿元，延续高分红策略。船舶行业上半年新接订单同比翻倍，景气度维持高位。
+美股科技财报超预期也在添柴。SpaceX二季度收入78亿美元同比增长92%、调整后EBITDA达35亿美元同比增191%远超预期，马斯克称Grok 4.6预计下周发布。AMD二季度营收115.4亿美元同比增50%、调整后EPS 1.66美元同比增246%，CEO苏姿丰预计数据中心销售2027年翻倍。药明康德全面上调全年业绩指引至585-605亿元、增速35%-39%，创新药景气度得到龙头验证。四部门联合印发《关于健全金融机构治理的实施意见》，券商行业竞争逻辑从拼规模转向拼治理，金融板块短期承压但中长期利好行业出清。
     </p>
 
-    <!-- 昨日A股速览 -->
     <div class="section-title">昨日A股速览</div>
 
     <p>
-昨日A股指数和个股严重背离。三大指数集体收跌——上证跌<span class="down">-0.59%</span>报3809点，深成指跌<span class="down">-0.96%</span>，创业板跌<span class="down">-1.24%</span>——但全市场4006家上涨、1466家下跌，赚钱效应反而达到73%。真正的拖累来自权重科技：科创50暴跌<span class="down">-5.08%</span>，电子板块主力净流出98亿居全市场之首。中证1000微涨<span class="up">+0.06%</span>，小盘股整体活跃。
+昨日A股走出深强沪弱的强修复格局。上证指数收涨<span class="up">+0.33%</span>报3822.28点，深成指涨<span class="up">+3.25%</span>报13885.71点，创业板指暴涨<span class="up">+5.64%</span>报3488.97点，科创50涨<span class="up">+4.09%</span>报1616.36点。全市场3642家上涨、1748家下跌，148家涨停、仅3家跌停，赚钱效应显著。成交额2.23万亿，较前日放量2174亿，增幅10.8%，量能配合良好。
     </p>
 
     <table class="data-table">
-      <thead>
-        <tr><th>指数</th><th>收盘</th><th class="col-pct">涨跌幅</th></tr>
-      </thead>
+      <thead><tr><th>指数</th><th>收盘</th><th class="col-pct">涨跌幅</th></tr></thead>
       <tbody>
-        <tr><td>上证指数</td><td>3809.66</td><td class="col-pct"><span class="down">-0.59%</span></td></tr>
-        <tr><td>深证成指</td><td>13448.29</td><td class="col-pct"><span class="down">-0.96%</span></td></tr>
-        <tr><td>创业板指</td><td>3302.55</td><td class="col-pct"><span class="down">-1.24%</span></td></tr>
-        <tr><td>沪深300</td><td>4543.18</td><td class="col-pct"><span class="down">-0.98%</span></td></tr>
-        <tr><td>中证500</td><td>7414.52</td><td class="col-pct"><span class="down">-1.06%</span></td></tr>
-        <tr><td>中证1000</td><td>7079.78</td><td class="col-pct"><span class="up">+0.06%</span></td></tr>
-        <tr><td>科创50</td><td>1552.89</td><td class="col-pct"><span class="down">-5.08%</span></td></tr>
+        <tr><td>上证指数</td><td>3822.28</td><td class="col-pct"><span class="up">+0.33%</span></td></tr>
+        <tr><td>深证成指</td><td>13885.71</td><td class="col-pct"><span class="up">+3.25%</span></td></tr>
+        <tr><td>创业板指</td><td>3488.97</td><td class="col-pct"><span class="up">+5.64%</span></td></tr>
+        <tr><td>沪深300</td><td>4600.93</td><td class="col-pct"><span class="up">+1.27%</span></td></tr>
+        <tr><td>中证500</td><td>7607.49</td><td class="col-pct"><span class="up">+2.60%</span></td></tr>
+        <tr><td>中证1000</td><td>7279.19</td><td class="col-pct"><span class="up">+2.82%</span></td></tr>
+        <tr><td>科创50</td><td>1616.36</td><td class="col-pct"><span class="up">+4.09%</span></td></tr>
       </tbody>
     </table>
 
     <p>
-成交额2.01万亿，较前一交易日缩量5488亿（<span class="down">-21%</span>），量能回到2万亿关口。涨停100家，跌停仅9家，短线情绪并不差。
-    </p>
-
-    <p>
-资金方向非常明确：避高就低。主力净流入集中在通信、电力设备和公用事业等低位防御方向。
+资金面上，主力资金大幅流入科技成长方向，四大行（工农中建）均跌超3%，资金从高股息防御切换到科技成长的信号非常明确。ETF层面，AI算力、芯片半导体、通信5G相关ETF表现强势，银行、交运物流、地产建筑ETF偏弱。
     </p>
 
     <table class="flow-table">
-      <thead>
-        <tr><th colspan="2" style="text-align:center;">📈 主力净流入 Top5</th></tr>
-      </thead>
+      <thead><tr><th colspan="3" style="text-align:center;">📈 主力净流入 Top5</th></tr></thead>
       <tbody>
-        <tr class="flow-inflow"><td>通信</td><td class="flow-amt">+39.71亿</td></tr>
-        <tr class="flow-inflow"><td>电力设备</td><td class="flow-amt">+20.70亿</td></tr>
-        <tr class="flow-inflow"><td>公用事业</td><td class="flow-amt">+16.88亿</td></tr>
-        <tr class="flow-inflow"><td>基础化工</td><td class="flow-amt">+9.18亿</td></tr>
-        <tr class="flow-inflow"><td>银行</td><td class="flow-amt">+8.28亿</td></tr>
+        <tr class="flow-inflow"><td>电子</td><td style="width:20%"><span class="up">+5.94%</span></td><td class="flow-amt">+331.25亿</td></tr>
+        <tr class="flow-inflow"><td>通信</td><td><span class="up">+7.78%</span></td><td class="flow-amt">+257.84亿</td></tr>
+        <tr class="flow-inflow"><td>医药生物</td><td><span class="up">+1.85%</span></td><td class="flow-amt">+63.82亿</td></tr>
+        <tr class="flow-inflow"><td>计算机</td><td><span class="up">+2.75%</span></td><td class="flow-amt">+61.35亿</td></tr>
+        <tr class="flow-inflow"><td>有色金属</td><td><span class="up">+1.51%</span></td><td class="flow-amt">+41.22亿</td></tr>
       </tbody>
     </table>
 
     <table class="flow-table">
-      <thead>
-        <tr><th colspan="2" style="text-align:center;">📉 主力净流出 Top5</th></tr>
-      </thead>
+      <thead><tr><th colspan="3" style="text-align:center;">📉 主力净流出 Top5</th></tr></thead>
       <tbody>
-        <tr class="flow-outflow"><td>电子</td><td class="flow-amt">-98.20亿</td></tr>
-        <tr class="flow-outflow"><td>建筑材料</td><td class="flow-amt">-25.64亿</td></tr>
-        <tr class="flow-outflow"><td>传媒</td><td class="flow-amt">-9.26亿</td></tr>
-        <tr class="flow-outflow"><td>医药生物</td><td class="flow-amt">-8.64亿</td></tr>
-        <tr class="flow-outflow"><td>有色金属</td><td class="flow-amt">-6.26亿</td></tr>
+        <tr class="flow-outflow"><td>银行</td><td><span class="down">-3.18%</span></td><td class="flow-amt">-39.03亿</td></tr>
+        <tr class="flow-outflow"><td>非银金融</td><td><span class="down">-1.04%</span></td><td class="flow-amt">-22.70亿</td></tr>
+        <tr class="flow-outflow"><td>建筑装饰</td><td><span class="down">-0.13%</span></td><td class="flow-amt">-7.67亿</td></tr>
+        <tr class="flow-outflow"><td>交通运输</td><td><span class="down">-1.67%</span></td><td class="flow-amt">-6.92亿</td></tr>
+        <tr class="flow-outflow"><td>食品饮料</td><td><span class="down">-1.76%</span></td><td class="flow-amt">-4.95亿</td></tr>
       </tbody>
     </table>
 
-    <p>
-电子一家的流出量相当于前五流入总量，科技线内部抛压集中释放。行业涨幅方面，综合<span class="up">+2.64%</span>、环保<span class="up">+2.40%</span>、轻工制造<span class="up">+1.38%</span>领涨，低位和防御品种接力明显。
-    </p>
-
-    <!-- 今日关注 -->
     <div class="section-title">今日关注</div>
 
     <p>
-隔夜美股科技大反弹和费半深V反转，对A股科技线构成直接情绪支撑。但关键不在于外盘涨了多少，而在于科创50昨天-5%的阴线能不能被承接住——如果早盘高开后量能跟不上、再度回落，那科技线的二次探底就还没走完；如果能放量站稳，短期超跌修复就值得认真对待。
+科技线修复的持续性是第一观察点。费半暴涨6.55%加日韩半导体大涨，对A股芯片和算力方向构成直接映射，但连涨两天后获利盘积累了不小的浮盈，高开后能否守住是关键——重点看中芯国际、寒武纪、中际旭创等龙头的量价配合。美伊缓和后油价的持续下探对能源和航运板块形成压制，石油石化和交通运输昨天已经走弱，今天可能继续承压。
     </p>
 
     <p>
-方向上看两条线：一是半导体和存储的超跌反弹机会，费半V型反转+闪迪涨6%的情绪传导，叠加集成电路条例修订的政策催化，关注设备、材料、存储方向的承接力度；二是新型电力系统规划驱动的电网设备、储能方向，政策窗口明确、资金已有先手流入，持续性优于纯题材轮动。
-    </p>
-
-    <p>
-操作上控制仓位，科技线不追高、等底部确认信号。低位消费、红利和公用事业方向资金持续流入，作为防御底仓的性价比仍在。
+宏观层面，央行5000亿逆回购投放表明流动性呵护态度，对市场整体偏友好，但银行板块在"金融机构治理新规"和资金外流双重压力下短期难以翻身。创新药方向有药明康德业绩验证和政策加持，逢低布局的性价比在提升。操作上，科技线仓位可以持有但不要追高加仓，观察开盘半小时的承接力度再定；银行和能源方向暂时回避。
     </p>
 
   </div>
 
-  <!-- 底部互动 -->
   <div class="footer-interact">
-    <p>📊 数据来源：通联数据、东方财富、公开市场信息</p>
-    <p>📝 微信公众号采集今日因频率限制未获取，隔夜事件以权威财经媒体联网核验为准</p>
+    <p>📊 数据来源：通联数据、东方财富、wewe-rss（公众号采集）、公开市场信息</p>
     <p class="emphasis">如果觉得有用，欢迎转发给需要的朋友 👇</p>
   </div>
 
-  <!-- 免责声明 -->
   <div class="disclaimer">
     <strong>免责声明：</strong>本内容仅供市场信息参考，不构成任何投资建议。投资有风险，入市需谨慎。文中数据来源于公开信息和第三方数据平台，已尽力确保准确但不做完整性保证。作者与所提及标的无利益关系。
   </div>
