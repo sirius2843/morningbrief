@@ -3,96 +3,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>毛驴有话说 · 每日早盘 2026-08-12</title>
+<title>毛驴有话说 · 每日早盘 — 2026年8月12日</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-  font-size: 15px; line-height: 1.85; color: #2c2c2c; background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.8;
+  font-size: 15px;
 }
-.container { max-width: 680px; margin: 0 auto; background: #fff; padding: 0 16px 32px; }
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 0 20px 30px;
+}
 
-/* Badge */
-.badge { display: inline-block; background: #1F4E79; color: #fff; font-size: 13px; font-weight: 600; padding: 4px 16px; border-radius: 3px; margin: 24px 0 16px; letter-spacing: 1px; }
+/* 栏目头 */
+.badge-bar {
+  background: linear-gradient(135deg, #1F4E79 0%, #2a6ba8 100%);
+  color: #fff;
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  border-radius: 0 0 4px 4px;
+  margin: 0 -20px 20px;
+}
 
-/* Title */
-.main-title { font-size: 22px; font-weight: 800; color: #1F4E79; line-height: 1.45; margin-bottom: 8px; }
-.date-line { font-size: 14px; color: #999; margin-bottom: 24px; }
+/* 主标题 */
+.main-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a3a5c;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
 
-/* Divider */
-.divider { border: none; border-top: 1px solid #e8e8e8; margin: 24px 0; }
+/* 日期 */
+.date-line {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee;
+}
 
-/* Intro */
-.intro-block { background: #f0f7fb; border-left: 4px solid #1F4E79; padding: 16px 20px; margin: 20px 0; border-radius: 0 6px 6px 0; color: #3a3a3a; }
+/* 导语 */
+.lead {
+  background: #f0f7fb;
+  border-left: 3px solid #1F4E79;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  border-radius: 0 4px 4px 0;
+}
 
-/* Section header */
-.section-header { background: linear-gradient(135deg, #1F4E79 0%, #2a6298 100%); color: #fff; font-size: 16px; font-weight: 700; padding: 10px 16px; margin: 32px 0 16px; border-left: 4px solid #D33A2F; border-radius: 0 4px 4px 0; }
+/* 段落标题 */
+.section-title {
+  background: #1F4E79;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 6px 14px;
+  margin: 24px 0 12px;
+  border-left: 4px solid #0d2f4e;
+  border-radius: 0 4px 4px 0;
+  display: inline-block;
+}
 
-/* Paragraph */
-p { margin-bottom: 16px; text-indent: 0; }
+/* 正文 */
+p {
+  margin-bottom: 12px;
+  text-indent: 0;
+}
 
-/* Colors */
+/* 涨跌颜色 */
 .up { color: #D33A2F; font-weight: 600; }
 .down { color: #1E9E5A; font-weight: 600; }
-.neutral { color: #666; }
-.highlight { color: #1F4E79; font-weight: 700; }
-.ticker { font-family: "SF Mono", "Menlo", "Monaco", monospace; font-size: 13px; color: #555; }
 
-/* Key bullet (for emphasis within prose) */
-.key-point { display: block; padding: 8px 0; border-bottom: 1px dashed #e8e8e8; }
-.key-point:last-child { border-bottom: none; }
+/* 关键数据高亮 */
+.highlight {
+  background: #fff9e6;
+  border-left: 3px solid #f0a030;
+  padding: 10px 14px;
+  margin: 16px 0;
+  font-size: 14px;
+  border-radius: 0 4px 4px 0;
+}
+.highlight .up, .highlight .down {
+  display: inline-block;
+  margin: 2px 0;
+}
 
-/* Bottom */
-.footer { margin-top: 40px; padding-top: 24px; border-top: 2px solid #1F4E79; }
-.footer-interact { text-align: center; color: #666; font-size: 14px; margin-bottom: 16px; }
-.footer-interact span { color: #D33A2F; }
-.footer-disclaimer { font-size: 12px; color: #aaa; text-align: center; line-height: 1.7; }
+/* 预警框 */
+.alert-box {
+  background: #fff5f5;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: #a33;
+  line-height: 1.7;
+}
+
+/* 分隔线 */
+hr.section-divider {
+  border: none;
+  border-top: 1px dashed #e0e0e0;
+  margin: 24px 0 16px;
+}
+
+/* 底部互动 */
+.footer-interact {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  line-height: 2;
+}
+.footer-interact b {
+  color: #1F4E79;
+}
+
+/* 免责 */
+.disclaimer {
+  margin-top: 20px;
+  padding: 12px 14px;
+  background: #fafafa;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.7;
+  text-align: center;
+}
 </style>
 </head>
 <body>
 <div class="container">
 
-<div class="badge">毛驴有话说 · 每日早盘</div>
+<div class="badge-bar">毛驴有话说 · 每日早盘</div>
 
-<div class="main-title">油价四连涨搅动全球，A股缩量三日，资金在往哪挪</div>
-<div class="date-line">2026年8月12日 · 周三</div>
+<div class="main-title">五连阳戛然而止，缩量四日，资金在悄悄往一个方向挪</div>
+<div class="date-line">2026年8月12日 周三</div>
 
-<hr class="divider">
+<div class="lead">
+隔夜美股三指齐跌、中概重挫近3%，油价四连涨续创新高；英伟达联手华尔街六大巨头推出<span style="color:#D33A2F;font-weight:600;">5000亿美元AI基建融资</span>，KKR暴涨6.9%；今晨韩股大涨2%独立走强，A50微跌0.15%——关键变量是今晚美国7月CPI。
+</div>
 
-<p>隔夜美股三指齐跌，道指收报53791跌<span class="down">0.34%</span>，标普500收7728跌<span class="down">0.32%</span>，纳指收26445跌<span class="down">0.60%</span>。跌得不算深，但结构上值得多看一眼：科技巨头承压明显，谷歌跌近4%创近六个月最大单日跌幅，亚马逊跌超2%，苹果跌逾1%；但芯片这条线完全反着走，费城半导体涨<span class="up">0.87%</span>，阿斯麦大涨4%，SK海力士涨超<span class="up">4.7%</span>，闪迪涨超2%。存储芯片的供需逻辑正在强化——美光高管在KeyBanc论坛上直接说2027年供需"将比2026年更为吃紧"，先进存储产线爬坡周期长、产能跟不上，这轮周期的长度可能超出市场预期。</p>
+<div class="section-title">隔夜外盘</div>
 
-<p>另一个值得留意的分化：中概股这边压力很大，金龙指数跌<span class="down">2.94%</span>，腾讯音乐跌近12%，哔哩哔哩跌超5%，京东阿里网易跌3%-4%；但华尔街另类资管板块全线暴涨，KKR涨<span class="up">6.92%</span>、阿波罗涨<span class="up">6.23%</span>、黑石涨<span class="up">3.89%</span>。涨的逻辑是同一件事——英伟达宣布联手这六家巨头组建<span class="highlight">5000亿美元AI基础设施融资平台</span>。黄仁勋连夜澄清说这不是"循环融资"，每个项目由第三方独立尽调，英伟达持股不超过25%。市场用钱投票：资管巨头涨、英伟达自身反而高开低走微跌0.02%，这种定价方式本身就说明资金更看好"卖铲子"的平台逻辑，而非单纯炒芯片。</p>
+<p>
+隔夜美股三大指数集体收跌，道指跌<span class="down">0.34%</span>报53791，标普跌<span class="down">0.32%</span>报7728，纳指跌<span class="down">0.60%</span>报26445。表面上跌幅不大，但拆开看结构有讲究——标普11个板块中8个下跌，通信服务和房地产领跌，但公用事业和能源逆势涨了<span class="up">1%</span>以上。盘面的真正故事藏在油价和AI融资里。
+</p>
+<p>
+布伦特原油冲到<span class="up">89.30美元</span>，已经是连续第四个交易日上涨。伊朗最高领袖顾问放话说"条件满足前霍尔木兹海峡不会开放"，叠加伊朗天然气产能修复消息来回拉扯，市场对中东供应链中断的担忧从"短期扰动"开始往"中期影响"定价。能源股全线飘红，康菲石油涨超<span class="up">2%</span>。
+</p>
+<p>
+不过真正炸裂的是英伟达那笔<span style="color:#D33A2F;font-weight:700;">5000亿美元AI基建融资</span>——联合KKR、Apollo、贝莱德、黑石、博枫、高盛六家华尔街巨头成立独立融资平台，用第三方资本给AI算力基建加杠杆。KKR当天暴涨<span class="up">6.9%</span>，Apollo涨<span class="up">6.3%</span>，黑石涨<span class="up">3.89%</span>。这个结构意味着什么？算力正在从"芯片生意"变成"基础设施资产类别"——可以加杠杆，可以证券化，未来甚至可能叠加国家信用。对二级市场来说，这直接把AI的叙事周期拉长了，但也埋下了"循环融资"的风险。英伟达股价从开盘涨2%到收盘微跌0.02%，说明市场一边兴奋一边犹豫。
+</p>
+<p>
+中概股成了重灾区，纳斯达克中国金龙指数跌了<span class="down">2.94%</span>，腾讯音乐暴跌近<span class="down">12%</span>（Q2财报营收增5.8%但市场对增速放缓不买账），京东、蔚来跌超<span class="down">4%</span>，阿里、百度跌超<span class="down">3%</span>。美债十年期收益率在4.69%附近，今晚美国7月CPI数据出炉，这是本周最大的宏观变量——市场现在对通胀路径分歧不小。
+</p>
+<p>
+美元指数平收99.83，离岸人民币在6.75附近小幅波动，富时A50期货夜盘跌0.09%、今晨继续跌0.15%，整体偏弱。
+</p>
 
-<p>原油四连涨，WTI收83.20涨<span class="up">1.3%</span>，布伦特收88.91涨<span class="up">1.36%</span>，盘中一度突破90美元。推手还是霍尔木兹海峡——白天巴基斯坦防长放话说美伊"接近达成某种安排"，油价盘中跳水；晚上伊朗最高领袖顾问又出来说"条件满足前不会开放"，油价应声拉回。卡塔尔外交部说阿曼-伊朗谈判已进入高级阶段。现在市场就在这两个叙事之间反复拉扯，而<span class="highlight">今晚美国7月CPI</span>的公布，会让这个拉扯多一个维度：如果通胀超预期叠加油价高企，美联储9月加息的概率又要重新定价。</p>
+<div class="section-title">亚太早盘</div>
 
-<div class="section-header">昨日A股：缩量轮动，资金从资源向科技医药迁移</div>
+<p>
+今天早上亚太市场走势分化明显。韩国KOSPI大幅高开<span class="up">1.5%</span>，随后继续拉升涨超<span class="up">2%</span>，三星电子涨<span class="up">4%</span>、SK海力士涨<span class="up">2%</span>。背后有两条催化：一是韩国副总理表态单一股票杠杆ETF交易规模已从19.4万亿韩元峰值缩水<b>96%</b>至8000亿，政策干预见效；二是韩国计划向AI主权财富基金投入1万亿韩元。日经则平淡得多，微跌0.03%，在67000点附近晃荡。
+</p>
+<p>
+韩股这股独立走强的劲儿，对于A股科技方向的情绪至少不是坏事。
+</p>
 
-<p>昨天盘面走得不轻松。沪指收3934.09跌<span class="down">0.82%</span>，深成指跌<span class="down">0.40%</span>，创业板指独涨<span class="up">0.34%</span>，科创50跌<span class="down">1.63%</span>。全市场5543只票里只有1616只上涨，涨比不到三成，涨跌停64:6。成交缩到2.34万亿，比前日少了2031亿，缩了8%。<span class="highlight">连续第三天缩量</span>——从2.54到2.34万亿，量能退潮的速度值得警惕。</p>
+<div class="section-title">昨日盘面</div>
 
-<p>板块轮动上，资金对地缘的定价非常直接：有色金属暴跌<span class="down">4.51%</span>，贵金属、稀土、小金属、锂矿全线重挫，主力净流出59亿；国防军工跌<span class="down">2.48%</span>紧随其后。另一方面，油价上涨直接映射到石油石化涨<span class="up">0.80%</span>，而资金真正在买的还是电子（净流入73亿，虽然板块跌了1.12%）、通信（<span class="up">+0.97%</span>，净流入61.5亿）和医药生物（<span class="up">+0.29%</span>，净流入60亿）。这种"跌了还买"的结构，说明机构调仓方向是明确的：高位资源赛道兑现利润，低位科技和医药在承接。</p>
+<p>
+昨天A股五连阳被终结。沪指跌<span class="down">0.82%</span>收3934点，深成指跌<span class="down">0.40%</span>，创业板独红涨<span class="up">0.34%</span>收3549点，科创50最弱跌了<span class="down">1.63%</span>。全市场成交缩到<b>2.34万亿</b>，比前天少了2031亿，已经是连续第四个交易日缩量。涨跌比接近1:2.3——1616只上涨、3777只下跌，赚钱效应很差。
+</p>
+<p>
+但缩量调整本身不坏。连涨五天之后打到年线附近遇到抛压是正常的，关键看资金从哪撤、往哪去。
+</p>
 
-<p>ETF数据也印证了这一点——有色贵金属ETF平均跌<span class="down">4.07%</span>，军工ETF跌<span class="down">2.38%</span>，化工材料跌<span class="down">1.78%</span>；而新能源电力设备涨<span class="up">0.41%</span>、电力公用涨<span class="up">0.40%</span>、AI算力涨<span class="up">0.12%</span>、医药医疗涨<span class="up">0.07%</span>，都在逆势小幅飘红。</p>
+<div class="highlight">
+撤出的方向很清晰：<span class="down">有色金属跌了4.51%</span>，主力净流出59亿，全场最惨；非银金融、建筑材料也跟着被卖。<br><br>
+钱去哪了？<span class="up">电子净流入73亿</span>、<span class="up">通信62亿</span>、<span class="up">医药生物60亿</span>——三条线索：AI算力链底部回补、创新药有业绩支撑走出6连板。
+</div>
 
-<div class="section-header">今日关注</div>
+<p>
+板块层面，CRO、创新药、医药商业涨得最好，MLCC（多层陶瓷电容）、机器人、光伏逆变器也维持活跃。跌得狠的主要是贵金属、稀土、航天军工、小金属——这些在之前反弹里涨幅大的方向，现在兑现压力来了。昨日宇树科技IPO摇号结果出炉，中签率约0.018%，但机器人概念更多是盘面脉冲，持续性还需要看。
+</p>
 
-<p><span class="highlight">地缘和油价仍是大变量。</span>阿曼-伊朗谈判说"高级阶段"但伊朗条件未满足，短期内海峡通航大概率不会落地。油价在高位，通胀预期会被反复拉扯，尤其今晚CPI数据是本周最大的宏观催化剂。对A股来说，油价上涨利好石油石化板块但压制中下游制造利润，同时也会让外资更谨慎——昨天北向资金配合内资一起在有色上出货。</p>
+<div class="section-title">几个需要跟踪的事</div>
 
-<p><span class="highlight">英伟达5000亿AI基建融资</span>这件事，短期对A股的映射路径不是芯片本身，而是算力基建链——服务器、光模块、数据中心电源和散热。工业富联刚发了半年报，净利同比增96%，这个兑现力度摆在那里。但要注意美股那边谷歌、微软、亚马逊都在跌，说明市场对AI资本开支的盈利转化仍有疑虑，这种分歧也会传导到A股。</p>
+<p>
+<b>油价四连涨</b>走到现在，核心驱动力已经不是基本面，而是霍尔木兹海峡这个"事件因子"。伊朗石油部长说正在修复天然气设施、9月底恢复产能，但同时伊朗安全委员会说条件不满足就不开海峡。两句话放在一起，短期油价大概率维持高位震荡——对A股来说，油气板块有支撑，但高油价对整体风险偏好是个压制。
+</p>
 
-<p><span class="highlight">流动性信号值得留意。</span>央行逆回购时隔两个月再现零操作，单日净回笼465亿。天风固收的分析提到，这属于季节性流动性调节，不代表货币政策转向。但量能连续三日萎缩叠加流动性边际收紧，短期市场整体的弹性会打折扣，今天看量能不能稳住2.3万亿以上。</p>
+<div class="alert-box">
+<b>今晚美国7月CPI</b>是本周最大的不确定性。如果高于预期，加息预期升温，美股科技股承压；如果低于预期，降息叙事重启，风险偏好回升。无论哪种，数据出来之前，今天A股大概率维持谨慎。
+</div>
 
-<p><span class="highlight">券商晨会分歧较大。</span>国盛看好科技成长（财报兑现+流动性边际改善），华泰继续推荐黄金和实物储备资产，中信建投看好军工反弹。本质上三家方向对的是三个不同逻辑——业绩驱动、避险配置和周期反转——说明当前市场没有形成一致性主线，资金在各条线之间快速轮动是大概率。</p>
+<p>
+央行逆回购昨天再现<b>零操作</b>，净回笼465亿，这是两个月来首次。放在缩量环境中看，流动性边际收紧的信号不需要过度解读——央行精准调控的意味更强，不等于转向收紧——但至少说明短期不会更松，对市场情绪构成一定制约。
+</p>
 
-<p>A50期货今晨续跌约15点，恒指夜期25533低水120点。日韩开盘分化，日经225微涨0.04%，韩国KOSPI涨1.5%明显偏强。整体看外围给A股早盘的情绪偏中性略弱，今天大盘大概率低开后看承接力度，关键看量能能不能稳住、<span class="highlight">创业板能不能延续昨天的相对强势</span>——昨天它是唯一红盘的指数，这个方向性信号值得跟踪。</p>
+<p>
+<b>英伟达5000亿融资</b>这件事值得长期关注，它的外溢效应会通过两个路径传导到A股：一是算力基建链本身——光模块、服务器、存储、液冷等方向的需求预期会被重新定价；二是AI融资模式"金融化"后如果成功跑通，全球AI资本开支的上限会被彻底打开。但同时也要警惕"循环融资"风险——如果英伟达用自己的芯片作为融资抵押物，这套逻辑在经济下行期会不会断裂，现在还看不清。
+</p>
+<p>
+恒生科技指数要把成分股从30只扩到50只，还要把收入增长纳入筛选，9月底公布结果、12月生效。对港股科技板块是中期利好，但短期交易更多是调仓层面。
+</p>
+<p>
+上海印发软件和信息服务业"十五五"规划，提出<b>十万卡级智算集群</b>、产业规模4万亿——这个体量不小，松江、临港、青浦三个区域受益，相关IDC、服务器、液冷标的可以留意。
+</p>
 
-<div class="footer">
-  <div class="footer-interact">
-    觉得有用？<span>点赞 · 在看 · 转发</span>，让更多朋友看到
-  </div>
-  <div class="footer-disclaimer">
-    以上内容仅供参考，不构成投资建议。市场有风险，投资需谨慎。<br>
-    数据来源：通联数据、东方财富、Wind、公开新闻
-  </div>
+<div class="section-title">今天怎么跟</div>
+
+<p>
+今天的市场情绪偏谨慎。外围偏弱+A50微跌+夜盘缩量，开盘不容易高开。但韩股大涨给科技方向提供了些暖意，AI算力链在资金面上有支撑。
+</p>
+<p>
+跟盘的时候关注几件事：一是成交能不能止住缩量——如果今天再缩、全天不到2.2万亿，市场进入"等方向"模式，仓位动作就不宜过大；二是电子、通信的资金流入能不能持续，这是判断AI链有没有形成主线的关键指标；三是今晚CPI的预期会在盘中通过北向资金和A50期货体现出来，尾盘走势是今天最有信息量的部分。
+</p>
+<p>
+策略上，今天以跟踪为主。仓位重的不用急加仓，仓位轻的可以在AI算力链和医药里有业绩支撑的品种上分批试探。对于有色、军工等前期涨幅大的方向，等缩量企稳再说。
+</p>
+
+<hr class="section-divider">
+
+<div class="footer-interact">
+喜欢今天的早盘内容？<br>
+<b>转发给需要的朋友，一起读懂市场</b><br>
+点击「在看」支持毛驴继续写 ✍️
+</div>
+
+<div class="disclaimer">
+风险提示：以上内容仅供参考，不构成投资建议。市场有风险，投资需谨慎。文中提及的行业和个股仅供分析参考，不代表买卖推荐。投资决策请结合自身风险承受能力独立判断。
 </div>
 
 </div>
