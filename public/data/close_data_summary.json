@@ -1,233 +1,233 @@
 {
-  "date": "2026-08-13",
+  "date": "2026-08-18",
   "indexes": [
     {
       "name": "上证指数",
       "ticker": "000001",
-      "trade_date": "2026-08-13",
-      "close": 3926.96,
-      "change": -19.71,
-      "pct": -0.5,
-      "amount_yi": 11642.03
+      "trade_date": "2026-08-18",
+      "close": 3990.3,
+      "change": 7.65,
+      "pct": 0.19,
+      "amount_yi": 11351.88
     },
     {
       "name": "深证成指",
       "ticker": "399001",
-      "trade_date": "2026-08-13",
-      "close": 14289.44,
-      "change": -124.98,
-      "pct": -0.87,
-      "amount_yi": 7813.29
+      "trade_date": "2026-08-18",
+      "close": 14622.5,
+      "change": -81.78,
+      "pct": -0.56,
+      "amount_yi": 6984.38
     },
     {
       "name": "创业板指",
       "ticker": "399006",
-      "trade_date": "2026-08-13",
-      "close": 3586.04,
-      "change": -16.04,
-      "pct": -0.45,
-      "amount_yi": 3048.69
+      "trade_date": "2026-08-18",
+      "close": 3705.56,
+      "change": -34.59,
+      "pct": -0.92,
+      "amount_yi": 2690.22
     },
     {
       "name": "沪深300",
       "ticker": "000300",
-      "trade_date": "2026-08-13",
-      "close": 4663.95,
-      "change": -26.97,
-      "pct": -0.57,
-      "amount_yi": 6907.16
+      "trade_date": "2026-08-18",
+      "close": 4725.81,
+      "change": -15.28,
+      "pct": -0.32,
+      "amount_yi": 6198.29
     },
     {
       "name": "中证500",
       "ticker": "000905",
-      "trade_date": "2026-08-13",
-      "close": 7968.38,
-      "change": -76.93,
-      "pct": -0.96,
-      "amount_yi": 4970.28
+      "trade_date": "2026-08-18",
+      "close": 8177.18,
+      "change": -7.46,
+      "pct": -0.09,
+      "amount_yi": 4586.88
     },
     {
       "name": "中证1000",
       "ticker": "000852",
-      "trade_date": "2026-08-13",
-      "close": 7715.89,
-      "change": -77.82,
-      "pct": -1.0,
-      "amount_yi": 5647.58
+      "trade_date": "2026-08-18",
+      "close": 7945.96,
+      "change": -22.42,
+      "pct": -0.28,
+      "amount_yi": 5392.22
     },
     {
       "name": "科创50",
       "ticker": "000688",
-      "trade_date": "2026-08-13",
-      "close": 1717.75,
-      "change": -19.24,
-      "pct": -1.11,
-      "amount_yi": 1256.77
+      "trade_date": "2026-08-18",
+      "close": 1790.87,
+      "change": 2.02,
+      "pct": 0.11,
+      "amount_yi": 1225.26
     }
   ],
   "breadth": {
-    "trade_date": "2026-08-13",
-    "universe_count": 5544,
-    "up_count": 1143,
-    "down_count": 4317,
-    "flat_count": 84,
-    "limit_up_count": 65,
-    "limit_down_count": 9,
-    "total_amount_yi": 25679.82,
-    "previous_total_amount_yi": 21671.66,
-    "delta_amount_yi": 4008.16,
-    "delta_pct": 18.49,
+    "trade_date": "2026-08-18",
+    "universe_count": 5546,
+    "up_count": 2122,
+    "down_count": 3292,
+    "flat_count": 132,
+    "limit_up_count": 84,
+    "limit_down_count": 15,
+    "total_amount_yi": 24197.8,
+    "previous_total_amount_yi": 24025.15,
+    "delta_amount_yi": 172.65,
+    "delta_pct": 0.72,
     "direction": "放量"
   },
   "flows": {
-    "trade_date": "2026-08-13",
+    "trade_date": "2026-08-18",
     "industry_count": 31,
     "top5_inflow": [
       {
-        "industry_id": "01032125",
-        "name": "计算机",
-        "industry_symbol": "710000",
-        "pct": -0.74,
-        "net_main_inflow_yi": 64.09
-      },
-      {
-        "industry_id": "01032117",
-        "name": "医药生物",
-        "industry_symbol": "370000",
-        "pct": 1.03,
-        "net_main_inflow_yi": 46.65
-      },
-      {
-        "industry_id": "01032108",
-        "name": "电力设备",
-        "industry_symbol": "630000",
-        "pct": -0.7,
-        "net_main_inflow_yi": 42.92
-      },
-      {
-        "industry_id": "01032127",
-        "name": "通信",
-        "industry_symbol": "730000",
-        "pct": 0.82,
-        "net_main_inflow_yi": 40.24
-      },
-      {
-        "industry_id": "01032118",
-        "name": "公用事业",
-        "industry_symbol": "410000",
-        "pct": 0.63,
-        "net_main_inflow_yi": 27.14
-      }
-    ],
-    "top5_outflow": [
-      {
-        "industry_id": "01032105",
-        "name": "有色金属",
-        "industry_symbol": "240000",
-        "pct": -3.58,
-        "net_main_inflow_yi": -43.06
-      },
-      {
-        "industry_id": "01032112",
-        "name": "电子",
-        "industry_symbol": "270000",
-        "pct": -1.43,
-        "net_main_inflow_yi": -17.49
-      },
-      {
-        "industry_id": "01032106",
-        "name": "建筑材料",
-        "industry_symbol": "610000",
-        "pct": -2.44,
-        "net_main_inflow_yi": -6.12
-      },
-      {
-        "industry_id": "01032120",
-        "name": "房地产",
-        "industry_symbol": "430000",
-        "pct": -2.26,
-        "net_main_inflow_yi": -5.11
-      },
-      {
-        "industry_id": "01032104",
-        "name": "钢铁",
-        "industry_symbol": "230000",
-        "pct": -1.57,
-        "net_main_inflow_yi": -4.08
-      }
-    ],
-    "top5_gainers": [
-      {
-        "industry_id": "01032117",
-        "name": "医药生物",
-        "industry_symbol": "370000",
-        "pct": 1.03,
-        "net_main_inflow_yi": 46.65
-      },
-      {
-        "industry_id": "01032121",
-        "name": "银行",
-        "industry_symbol": "480000",
-        "pct": 1.01,
-        "net_main_inflow_yi": 13.91
-      },
-      {
-        "industry_id": "01032127",
-        "name": "通信",
-        "industry_symbol": "730000",
-        "pct": 0.82,
-        "net_main_inflow_yi": 40.24
-      },
-      {
-        "industry_id": "01032128",
-        "name": "综合",
-        "industry_symbol": "510000",
-        "pct": 0.77,
-        "net_main_inflow_yi": 1.34
-      },
-      {
-        "industry_id": "01032118",
-        "name": "公用事业",
-        "industry_symbol": "410000",
-        "pct": 0.63,
-        "net_main_inflow_yi": 27.14
-      }
-    ],
-    "top5_losers": [
-      {
-        "industry_id": "01032105",
-        "name": "有色金属",
-        "industry_symbol": "240000",
-        "pct": -3.58,
-        "net_main_inflow_yi": -43.06
-      },
-      {
-        "industry_id": "01032106",
-        "name": "建筑材料",
-        "industry_symbol": "610000",
-        "pct": -2.44,
-        "net_main_inflow_yi": -6.12
-      },
-      {
-        "industry_id": "01032120",
-        "name": "房地产",
-        "industry_symbol": "430000",
-        "pct": -2.26,
-        "net_main_inflow_yi": -5.11
+        "industry_id": "01032101",
+        "name": "农林牧渔",
+        "industry_symbol": "110000",
+        "pct": 3.67,
+        "net_main_inflow_yi": 22.46
       },
       {
         "industry_id": "01032103",
         "name": "基础化工",
         "industry_symbol": "220000",
-        "pct": -2.09,
-        "net_main_inflow_yi": 1.03
+        "pct": 0.56,
+        "net_main_inflow_yi": 15.72
       },
       {
-        "industry_id": "01032115",
-        "name": "纺织服饰",
-        "industry_symbol": "350000",
-        "pct": -1.79,
-        "net_main_inflow_yi": 0.85
+        "industry_id": "01032121",
+        "name": "银行",
+        "industry_symbol": "480000",
+        "pct": 1.2,
+        "net_main_inflow_yi": 15.43
+      },
+      {
+        "industry_id": "01032109",
+        "name": "机械设备",
+        "industry_symbol": "640000",
+        "pct": 0.59,
+        "net_main_inflow_yi": 15.21
+      },
+      {
+        "industry_id": "01032136",
+        "name": "石油石化",
+        "industry_symbol": "750000",
+        "pct": 2.1,
+        "net_main_inflow_yi": 6.45
+      }
+    ],
+    "top5_outflow": [
+      {
+        "industry_id": "01032112",
+        "name": "电子",
+        "industry_symbol": "270000",
+        "pct": -0.38,
+        "net_main_inflow_yi": -86.56
+      },
+      {
+        "industry_id": "01032127",
+        "name": "通信",
+        "industry_symbol": "730000",
+        "pct": -1.29,
+        "net_main_inflow_yi": -79.65
+      },
+      {
+        "industry_id": "01032125",
+        "name": "计算机",
+        "industry_symbol": "710000",
+        "pct": -0.81,
+        "net_main_inflow_yi": -28.41
+      },
+      {
+        "industry_id": "01032122",
+        "name": "非银金融",
+        "industry_symbol": "490000",
+        "pct": -1.27,
+        "net_main_inflow_yi": -19.15
+      },
+      {
+        "industry_id": "01032106",
+        "name": "建筑材料",
+        "industry_symbol": "610000",
+        "pct": -1.28,
+        "net_main_inflow_yi": -9.86
+      }
+    ],
+    "top5_gainers": [
+      {
+        "industry_id": "01032101",
+        "name": "农林牧渔",
+        "industry_symbol": "110000",
+        "pct": 3.67,
+        "net_main_inflow_yi": 22.46
+      },
+      {
+        "industry_id": "01032136",
+        "name": "石油石化",
+        "industry_symbol": "750000",
+        "pct": 2.1,
+        "net_main_inflow_yi": 6.45
+      },
+      {
+        "industry_id": "01032135",
+        "name": "煤炭",
+        "industry_symbol": "740000",
+        "pct": 1.52,
+        "net_main_inflow_yi": 1.29
+      },
+      {
+        "industry_id": "01032121",
+        "name": "银行",
+        "industry_symbol": "480000",
+        "pct": 1.2,
+        "net_main_inflow_yi": 15.43
+      },
+      {
+        "industry_id": "01032113",
+        "name": "家用电器",
+        "industry_symbol": "330000",
+        "pct": 0.79,
+        "net_main_inflow_yi": 3.36
+      }
+    ],
+    "top5_losers": [
+      {
+        "industry_id": "01032128",
+        "name": "综合",
+        "industry_symbol": "510000",
+        "pct": -1.69,
+        "net_main_inflow_yi": -0.19
+      },
+      {
+        "industry_id": "01032127",
+        "name": "通信",
+        "industry_symbol": "730000",
+        "pct": -1.29,
+        "net_main_inflow_yi": -79.65
+      },
+      {
+        "industry_id": "01032106",
+        "name": "建筑材料",
+        "industry_symbol": "610000",
+        "pct": -1.28,
+        "net_main_inflow_yi": -9.86
+      },
+      {
+        "industry_id": "01032122",
+        "name": "非银金融",
+        "industry_symbol": "490000",
+        "pct": -1.27,
+        "net_main_inflow_yi": -19.15
+      },
+      {
+        "industry_id": "01032126",
+        "name": "传媒",
+        "industry_symbol": "720000",
+        "pct": -1.18,
+        "net_main_inflow_yi": -7.36
       }
     ],
     "all_level1": [
@@ -235,221 +235,267 @@
         "industry_id": "01032119",
         "name": "交通运输",
         "industry_symbol": "420000",
-        "pct": -0.71,
-        "net_main_inflow_yi": -1.46
+        "pct": 0.43,
+        "net_main_inflow_yi": 3.14
       },
       {
         "industry_id": "01032126",
         "name": "传媒",
         "industry_symbol": "720000",
-        "pct": -1.44,
-        "net_main_inflow_yi": 12.96
+        "pct": -1.18,
+        "net_main_inflow_yi": -7.36
       },
       {
         "industry_id": "01032118",
         "name": "公用事业",
         "industry_symbol": "410000",
-        "pct": 0.63,
-        "net_main_inflow_yi": 27.14
+        "pct": -0.28,
+        "net_main_inflow_yi": -4.03
       },
       {
         "industry_id": "01032101",
         "name": "农林牧渔",
         "industry_symbol": "110000",
-        "pct": -0.5,
-        "net_main_inflow_yi": 1.05
+        "pct": 3.67,
+        "net_main_inflow_yi": 22.46
       },
       {
         "industry_id": "01032117",
         "name": "医药生物",
         "industry_symbol": "370000",
-        "pct": 1.03,
-        "net_main_inflow_yi": 46.65
+        "pct": -0.71,
+        "net_main_inflow_yi": -2.08
       },
       {
         "industry_id": "01032123",
         "name": "商贸零售",
         "industry_symbol": "450000",
-        "pct": -1.54,
-        "net_main_inflow_yi": -0.76
+        "pct": 0.43,
+        "net_main_inflow_yi": 3.42
       },
       {
         "industry_id": "01032110",
         "name": "国防军工",
         "industry_symbol": "650000",
-        "pct": -0.74,
-        "net_main_inflow_yi": 6.22
+        "pct": -0.49,
+        "net_main_inflow_yi": -1.44
       },
       {
         "industry_id": "01032103",
         "name": "基础化工",
         "industry_symbol": "220000",
-        "pct": -2.09,
-        "net_main_inflow_yi": 1.03
+        "pct": 0.56,
+        "net_main_inflow_yi": 15.72
       },
       {
         "industry_id": "01032113",
         "name": "家用电器",
         "industry_symbol": "330000",
-        "pct": -0.58,
-        "net_main_inflow_yi": 2.86
+        "pct": 0.79,
+        "net_main_inflow_yi": 3.36
       },
       {
         "industry_id": "01032106",
         "name": "建筑材料",
         "industry_symbol": "610000",
-        "pct": -2.44,
-        "net_main_inflow_yi": -6.12
+        "pct": -1.28,
+        "net_main_inflow_yi": -9.86
       },
       {
         "industry_id": "01032107",
         "name": "建筑装饰",
         "industry_symbol": "620000",
-        "pct": -1.0,
-        "net_main_inflow_yi": 4.97
+        "pct": -0.33,
+        "net_main_inflow_yi": 2.96
       },
       {
         "industry_id": "01032120",
         "name": "房地产",
         "industry_symbol": "430000",
-        "pct": -2.26,
-        "net_main_inflow_yi": -5.11
+        "pct": -0.33,
+        "net_main_inflow_yi": 4.8
       },
       {
         "industry_id": "01032105",
         "name": "有色金属",
         "industry_symbol": "240000",
-        "pct": -3.58,
-        "net_main_inflow_yi": -43.06
+        "pct": -0.61,
+        "net_main_inflow_yi": -6.3
       },
       {
         "industry_id": "01032109",
         "name": "机械设备",
         "industry_symbol": "640000",
-        "pct": -1.17,
-        "net_main_inflow_yi": 16.36
+        "pct": 0.59,
+        "net_main_inflow_yi": 15.21
       },
       {
         "industry_id": "01032111",
         "name": "汽车",
         "industry_symbol": "280000",
-        "pct": -1.22,
-        "net_main_inflow_yi": 0.21
+        "pct": -0.07,
+        "net_main_inflow_yi": -1.27
       },
       {
         "industry_id": "01032135",
         "name": "煤炭",
         "industry_symbol": "740000",
-        "pct": -0.55,
-        "net_main_inflow_yi": -0.04
+        "pct": 1.52,
+        "net_main_inflow_yi": 1.29
       },
       {
         "industry_id": "01032137",
         "name": "环保",
         "industry_symbol": "760000",
-        "pct": -1.24,
-        "net_main_inflow_yi": -0.41
+        "pct": -0.65,
+        "net_main_inflow_yi": 0.21
       },
       {
         "industry_id": "01032108",
         "name": "电力设备",
         "industry_symbol": "630000",
-        "pct": -0.7,
-        "net_main_inflow_yi": 42.92
+        "pct": -0.68,
+        "net_main_inflow_yi": -9.12
       },
       {
         "industry_id": "01032112",
         "name": "电子",
         "industry_symbol": "270000",
-        "pct": -1.43,
-        "net_main_inflow_yi": -17.49
+        "pct": -0.38,
+        "net_main_inflow_yi": -86.56
       },
       {
         "industry_id": "01032136",
         "name": "石油石化",
         "industry_symbol": "750000",
-        "pct": -1.32,
-        "net_main_inflow_yi": -3.58
+        "pct": 2.1,
+        "net_main_inflow_yi": 6.45
       },
       {
         "industry_id": "01032124",
         "name": "社会服务",
         "industry_symbol": "460000",
-        "pct": -1.41,
-        "net_main_inflow_yi": -0.72
+        "pct": -0.08,
+        "net_main_inflow_yi": 0.46
       },
       {
         "industry_id": "01032115",
         "name": "纺织服饰",
         "industry_symbol": "350000",
-        "pct": -1.79,
-        "net_main_inflow_yi": 0.85
+        "pct": -0.02,
+        "net_main_inflow_yi": -1.08
       },
       {
         "industry_id": "01032128",
         "name": "综合",
         "industry_symbol": "510000",
-        "pct": 0.77,
-        "net_main_inflow_yi": 1.34
+        "pct": -1.69,
+        "net_main_inflow_yi": -0.19
       },
       {
         "industry_id": "01032138",
         "name": "美容护理",
         "industry_symbol": "770000",
-        "pct": -0.63,
-        "net_main_inflow_yi": 0.04
+        "pct": -0.93,
+        "net_main_inflow_yi": 0.0
       },
       {
         "industry_id": "01032125",
         "name": "计算机",
         "industry_symbol": "710000",
-        "pct": -0.74,
-        "net_main_inflow_yi": 64.09
+        "pct": -0.81,
+        "net_main_inflow_yi": -28.41
       },
       {
         "industry_id": "01032116",
         "name": "轻工制造",
         "industry_symbol": "360000",
-        "pct": -1.48,
-        "net_main_inflow_yi": -0.35
+        "pct": -0.2,
+        "net_main_inflow_yi": -0.2
       },
       {
         "industry_id": "01032127",
         "name": "通信",
         "industry_symbol": "730000",
-        "pct": 0.82,
-        "net_main_inflow_yi": 40.24
+        "pct": -1.29,
+        "net_main_inflow_yi": -79.65
       },
       {
         "industry_id": "01032104",
         "name": "钢铁",
         "industry_symbol": "230000",
-        "pct": -1.57,
-        "net_main_inflow_yi": -4.08
+        "pct": 0.41,
+        "net_main_inflow_yi": 0.54
       },
       {
         "industry_id": "01032121",
         "name": "银行",
         "industry_symbol": "480000",
-        "pct": 1.01,
-        "net_main_inflow_yi": 13.91
+        "pct": 1.2,
+        "net_main_inflow_yi": 15.43
       },
       {
         "industry_id": "01032122",
         "name": "非银金融",
         "industry_symbol": "490000",
-        "pct": 0.24,
-        "net_main_inflow_yi": 16.82
+        "pct": -1.27,
+        "net_main_inflow_yi": -19.15
       },
       {
         "industry_id": "01032114",
         "name": "食品饮料",
         "industry_symbol": "340000",
-        "pct": 0.45,
-        "net_main_inflow_yi": 6.83
+        "pct": 0.42,
+        "net_main_inflow_yi": 0.62
       }
     ],
     "level_rule": "通联 market/getMktInstEqudV1 中 industryID 长度为8的一级行业"
   },
-  "top_sectors": []
+  "top_sectors": [
+    {
+      "sector": "机器人高端制造",
+      "industry_code": "545",
+      "avg_change": 0.82,
+      "volume": 39.5,
+      "lead_etf": "富国国证机器人产业ETF",
+      "lead_change": 2.65,
+      "report_url": "https://reportapi.eastmoney.com/report/list?pageSize=5&pageNo=1&beginTime=2025-01-01&endTime=2026-08-18&qType=1&industryCode=545"
+    },
+    {
+      "sector": "煤炭钢铁",
+      "industry_code": "1250",
+      "avg_change": 0.78,
+      "volume": 8.5,
+      "lead_etf": "国泰中证煤炭ETF",
+      "lead_change": 1.12,
+      "report_url": "https://reportapi.eastmoney.com/report/list?pageSize=5&pageNo=1&beginTime=2025-01-01&endTime=2026-08-18&qType=1&industryCode=1250"
+    },
+    {
+      "sector": "食品饮料",
+      "industry_code": "1277",
+      "avg_change": 0.66,
+      "volume": 7.0,
+      "lead_etf": "华夏中证全指食品ETF",
+      "lead_change": 1.18,
+      "report_url": "https://reportapi.eastmoney.com/report/list?pageSize=5&pageNo=1&beginTime=2025-01-01&endTime=2026-08-18&qType=1&industryCode=1277"
+    },
+    {
+      "sector": "银行",
+      "industry_code": "475",
+      "avg_change": 0.5,
+      "volume": 17.2,
+      "lead_etf": "华宝中证银行ETF",
+      "lead_change": 0.75,
+      "report_url": "https://reportapi.eastmoney.com/report/list?pageSize=5&pageNo=1&beginTime=2025-01-01&endTime=2026-08-18&qType=1&industryCode=475"
+    },
+    {
+      "sector": "芯片半导体",
+      "industry_code": "1036",
+      "avg_change": -0.03,
+      "volume": 324.0,
+      "lead_etf": "华夏上证科创板半导体材料设备主题ETF",
+      "lead_change": 2.51,
+      "report_url": "https://reportapi.eastmoney.com/report/list?pageSize=5&pageNo=1&beginTime=2025-01-01&endTime=2026-08-18&qType=1&industryCode=1036"
+    }
+  ]
 }
